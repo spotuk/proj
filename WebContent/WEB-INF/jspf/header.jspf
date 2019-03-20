@@ -1,0 +1,72 @@
+<%--=========================================================================== 
+Header (top area). 
+===========================================================================--%>
+<%@ page import="ua.kpi.getman.InternetShop.bean.CartBean"%>
+<%@ page import="ua.kpi.getman.InternetShop.db.Role"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="#">Navbar</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link"
+				href="controller?command=category&action=category" role="button">Main</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">About us</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">Contacts</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="shopping_cart.jsp">Cart</a></li>
+			<form action="">
+				<select name="language" id="inputLang" class="form-control"
+					onchange="document.location=this.options[this.selectedIndex].value">
+					<option value="#">lang</option>
+					<c:forEach items="${langList}" var="lang">
+
+						<option value="controller?command=category&action=category&language=${lang.id}">${lang.title}</option>
+
+					</c:forEach>
+				</select>
+			</form>
+
+
+		</ul>
+		<div>
+			<c:choose>
+				<c:when test="${userRole.name == 'client'}">
+					<a class="btn btn-warning" href="personal_cabinet.jsp">Personal
+						Cabinet</a> &nbsp;
+		</c:when>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${userRole.name == 'admin'}">
+					<a class="btn btn-warning" href="admin_panel.jsp">Admin Panel</a> &nbsp;
+		</c:when>
+			</c:choose>
+
+			
+
+
+			<c:if test="${not empty userRole}">
+				<c:out value="(${userRole.name})" />
+					<c:out value="${user.firstName} ${user.lastName}" />
+				<a class="btn btn-secondary" href="controller?command=logout"
+					role="button">Logout</a>
+			</c:if>
+
+			<c:if test="${empty user and title ne 'Login'}">
+				<div id="rightHeader">
+					<a class="btn btn-secondary" href="login.jsp" role="button">Login</a>
+				</div>
+			</c:if>
+
+		</div>
+	</div>
+</nav>

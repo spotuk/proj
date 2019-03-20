@@ -1,0 +1,8 @@
+<%--=========================================================================== 
+Footer (bottom area). 
+===========================================================================--%> 
+
+<tr>
+	<td id="footer">&copy;Getman Valentine, 2019</td>
+</tr>
+<script type="text/javascript" src="jc/bootstrap.js"></script>
